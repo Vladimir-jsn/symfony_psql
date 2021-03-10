@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+
+  database:
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_USER: main
+      POSTGRES_PASSWORD: main
+      POSTGRES_DB: main
+    ports: [ 5432 ]
+
+  php:
+    links:
+      - "database:db"
+    build: .docker/php
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    command: bash -c "composer install &&
+               bash ./.docker/scripts/setup.sh &&
+               php -d variables_order=EGPCS -S 0.0.0.0:80 -t public"
+    ports:
+      - 80:80

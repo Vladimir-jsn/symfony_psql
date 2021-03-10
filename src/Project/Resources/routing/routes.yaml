@@ -1,0 +1,20 @@
+
+orders.get:
+    path: "/api/orders"
+    methods: GET
+    controller: App\Project\Http\Controller\OrderController:index
+
+orders.get.by.id:
+    path: "/api/order/{id}"
+    methods: GET
+    controller: App\Project\Http\Controller\OrderController:get
+
+orders.create:
+    path: "/api/orders"
+    methods: POST
+    controller: App\Project\Http\Controller\OrderController:create
+
+orders.update:
+    path: "/api/orders/{id}"
+    methods: PUT
+    controller: App\Project\Http\Controller\OrderController:update
