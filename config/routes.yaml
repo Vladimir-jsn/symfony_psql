@@ -1,0 +1,8 @@
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing/swaggerui.xml"
+    prefix:   /
+
+project:
+    # loads routes from the YAML or XML files found in some bundle directory
+    resource: '../src/Project/Resources/routing/'
+    type:     directory

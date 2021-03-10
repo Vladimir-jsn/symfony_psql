@@ -1,0 +1,3 @@
+services:
+    project.order.transformer:
+        class: App\Project\Domain\Order\OrderTransformer

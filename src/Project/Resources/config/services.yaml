@@ -1,0 +1,25 @@
+imports:
+  - { resource: "transformers.yaml"}
+
+services:
+  ## here will be project's services
+
+  project.event_listener.api_exception:
+     class: App\Project\App\EventListener\ApiExceptionListener
+     arguments: ['%%kernel.debug%%']
+     tags:
+         - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: 200 }
+
+  ## Fractal Service
+  project.fractal.manager:
+       class: App\Project\App\Support\FractalService
+       public: true
+       arguments: ['%siteUrl%']
+  App\Project\App\Support\FractalService: '@project.fractal.manager'
+
+  ## Project Order Service
+  project.order.service:
+      class: App\Project\Domain\Order\OrderService
+      public: true
+      arguments: ['@doctrine.orm.entity_manager','@project.order.transformer','@project.fractal.manager']
+  App\Project\Domain\Order\OrderService: '@project.order.service'
